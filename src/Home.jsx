@@ -1,14 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import HeroSection from "./components/HeroSection";
+import Services from "./components/Services";
+import Trusted from "./components/Trusted";
 
 function Home() {
-  return <Wrapper className="test">Home</Wrapper>;
+  const data = {
+    name: "ShopEase",
+  };
+
+  return (
+    <Wrapper className="test">
+      <HeroSection myData={data} />
+      <Services />
+      <Trusted />
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.section`
-  background-color: ${({ theme }) => theme.colors.bg};
-  width: 20rem;
-  height: 20rem;
+  height: 100vh;
+  background-color: #fff;
 `;
 
 export default Home;

@@ -1,9 +1,12 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
+import { CgClose, CgMenu } from "react-icons/cg";
+import { useState } from "react";
 
 function Nav() {
+  const [menuIcon, setMenuIcon] = useState();
+
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -132,7 +135,7 @@ function Nav() {
         transition: all 3s linear;
 
         .navbar-link {
-          font-size: 4.2rem;
+          font-size: 2.2rem;
         }
       }
       .cart-trolley--link {
@@ -140,12 +143,12 @@ function Nav() {
 
         .cart-trolley {
           position: relative;
-          font-size: 2.2rem;
+          font-size: 3rem;
         }
 
         .cart-total--item {
-          width: 2rem;
-          height: 2rem;
+          width: 3rem;
+          height: 3rem;
           position: absolute;
           background-color: 5822c3;
           color: #fff;
@@ -168,25 +171,37 @@ function Nav() {
 
   return (
     <Nav>
-      <div>
+      <div className={menuIcon ? "navbar active" : "navbar"}>
         <ul className="navbar-lists">
           <li>
-            <NavLink to="/" className="navbar-link">
+            <NavLink
+              to="/"
+              className="navbar-link"
+              onClick={() => setMenuIcon(false)}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" className="navbar-link">
+            <NavLink
+              to="/about"
+              className="navbar-link"
+              onClick={() => setMenuIcon(false)}>
               About
             </NavLink>
           </li>
           <li>
-            <NavLink to="/product" className="navbar-link">
+            <NavLink
+              to="/product"
+              className="navbar-link"
+              onClick={() => setMenuIcon(false)}>
               Products
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contact" className="navbar-link">
+            <NavLink
+              to="/contact"
+              className="navbar-link"
+              onClick={() => setMenuIcon(false)}>
               Contact
             </NavLink>
           </li>
@@ -197,6 +212,21 @@ function Nav() {
             </NavLink>
           </li>
         </ul>
+
+        {/* two button for open and close of menu */}
+
+        <div className="mobile-navbar-btn">
+          <CgMenu
+            name="menu-outline"
+            className="mobile-nav-icon"
+            onClick={() => setMenuIcon(true)}
+          />
+          <CgClose
+            name="close-outline"
+            className="mobile-nav-icon close-outline"
+            onClick={() => setMenuIcon(false)}
+          />
+        </div>
       </div>
     </Nav>
   );
