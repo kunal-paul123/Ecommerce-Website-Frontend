@@ -3,9 +3,24 @@ import { useFilterContext } from "../productcontext/Filter_context";
 
 function FilterSection() {
   const {
-    filter: { text },
+    filter: { text, category },
+    all_products,
     updateFilterValue,
+    cleanFilters,
   } = useFilterContext();
+
+  //to get unique data of each field
+  const getUniqueData = (data, property) => {
+    let newVal = data.map((curElem) => {
+      return curElem[property];
+    });
+    return (newVal = ["all", ...new Set(newVal)]);
+    // console.log(newVal);
+  };
+
+  //we need unique data
+  const categoryData = getUniqueData(all_products, "category");
+  const companyData = getUniqueData(all_products, "company");
 
   return (
     <Wrapper>
@@ -19,6 +34,48 @@ function FilterSection() {
             onChange={updateFilterValue}
           />
         </form>
+        <div className="filter-category">
+          <h3>Category</h3>
+          <div>
+            {categoryData.map((curElem, index) => {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  name="category"
+                  value={curElem}
+                  onClick={updateFilterValue}>
+                  {curElem}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="filter-company">
+          <h3>Company</h3>
+          <form action="#">
+            <select
+              name="company"
+              id="company"
+              className="filter-company--select"
+              onClick={updateFilterValue}>
+              {companyData.map((curElem, index) => {
+                return (
+                  <option value={curElem} key={index} name="company">
+                    {curElem}
+                  </option>
+                );
+              })}
+            </select>
+          </form>
+        </div>
+
+        <div className="filter-clear">
+          <button className="btn" onClick={cleanFilters}>
+            Clear Filters
+          </button>
+        </div>
       </div>
     </Wrapper>
   );
@@ -126,6 +183,11 @@ const Wrapper = styled.section`
   }
 
   .filter-clear .btn {
+    margin-top: 5rem;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
     background-color: #ec7063;
     color: #000;
   }

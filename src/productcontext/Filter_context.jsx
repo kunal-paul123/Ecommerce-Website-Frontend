@@ -11,6 +11,8 @@ const initialState = {
   sorting_value: "lowest",
   filter: {
     text: "",
+    category: "all",
+    company: "all",
   },
 };
 
@@ -43,6 +45,11 @@ const FilterContextProvider = ({ children }) => {
     return dispatch({ type: "UPDATE_FILTER_VALUE", payload: { name, value } });
   };
 
+  //to clean the filter
+  const cleanFilters = () => {
+    dispatch({ type: "CLEAR_FILTERS" });
+  };
+
   //to sort the products
   useEffect(() => {
     dispatch({ type: "FILTER_PRODUCTS" });
@@ -61,6 +68,7 @@ const FilterContextProvider = ({ children }) => {
         setListView,
         sorting,
         updateFilterValue,
+        cleanFilters,
       }}>
       {children}
     </FilterContext.Provider>
