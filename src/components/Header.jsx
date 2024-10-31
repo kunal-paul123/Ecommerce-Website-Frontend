@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "./Nav";
+
+import Navbar from "./Nav";
 
 function Header() {
   return (
@@ -9,7 +10,7 @@ function Header() {
       <NavLink to="/">
         <img className="logo" src="./images/logo.png" alt="my logo img" />
       </NavLink>
-      <Nav />
+      <Navbar />
     </MainHeader>
   );
 }
