@@ -113,16 +113,25 @@ const cartReducer = (state, action) => {
     };
   }
 
-  if (action.type === "CART_TOTAL_ITEM") {
-    let updatedItemValue = state.cart.reduce((acc, curElem) => {
-      let { amount } = curElem;
-      acc = acc + amount;
-      return acc;
-    }, 0);
+  if (action.type === "CART_ITEM_PRICE_TOTAL") {
+    let { total_item, total_price } = state.cart.reduce(
+      (acc, curElem) => {
+        let { amount, price } = curElem;
+        acc.total_item += amount;
+        acc.total_price += amount * price;
+
+        return acc;
+      },
+      {
+        total_item: 0,
+        total_price: 0,
+      }
+    );
 
     return {
       ...state,
-      total_item: updatedItemValue,
+      total_item: total_item,
+      total_price: total_price,
     };
   }
 };

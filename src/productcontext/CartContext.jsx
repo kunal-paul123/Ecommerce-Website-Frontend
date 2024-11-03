@@ -49,7 +49,9 @@ const CartProvider = ({ children }) => {
   //to add dada in localStorage
   //get and set
   useEffect(() => {
-    dispatch({ type: "CART_TOTAL_ITEM" });
+    // dispatch({ type: "CART_TOTAL_ITEM" });
+    // dispatch({ type: "CART_TOTAL_PRICE" });
+    dispatch({ type: "CART_ITEM_PRICE_TOTAL" });
     localStorage.setItem("CartItems", JSON.stringify(state.cart));
   }, [state.cart]);
 
